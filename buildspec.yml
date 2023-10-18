@@ -6,8 +6,9 @@ phases:
     
   build:
     commands:
-      - echo "Zipping deployment package..."
-      - ls
+      - echo "Zipping deployment package..." 
+      - zip -r9 ../nodejs.zip .
+
   post_build:
     commands:
       - echo "Updating lambda Function..."
