@@ -1,0 +1,18 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    
+  build:
+    commands:
+      - echo "Zipping deployment package..."
+      - cd lib
+      - zip -r9 ../nodejs.zip . -i .
+      - cd ..
+      - zip nodejs.zip index.js
+  post_build:
+    commands:
+      - echo "Updating lambda Function..."
+      - aws lambda update-function-code --function-name github-to-lambda-demo  --zip-file fileb://deployment_package.zip
+      - echo "DONE!!"
